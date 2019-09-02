@@ -14,11 +14,14 @@ using Compat
 import Compat.Sys
 using Compat.Printf
 
+using Homebrew
+
 export format, match, list
 
 function __init__()
     if isdefined(Fontconfig, :FONTCONFIG_FILE)
         ENV["FONTCONFIG_FILE"] = FONTCONFIG_FILE
+        run(`cat $(ENV["FONTCONFIG_FILE"])`)
     end
     ccall((:FcInit, jl_libfontconfig), UInt8, ())
 
